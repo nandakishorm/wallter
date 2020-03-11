@@ -1,9 +1,2 @@
-server:
-  port: 8761
-
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-  datacenter: HM-Bangalore
-  environment: development
+prop:
+  description: My default property yml
