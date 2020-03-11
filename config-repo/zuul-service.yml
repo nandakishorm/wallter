@@ -1,1 +1,36 @@
+server:
+  port: 8079
 
+spring:
+  application:
+    name: zuul-service
+    
+zuul:
+  #Service will be mapped under the /rest/v1 URI
+  prefix: /rest/v1
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    lead-service:
+      path: /lead/**
+      url: lead-service
+      stripPrefix: false
+    ui-service:
+      path: /ui/**
+      serviceId: ui-service
+      stripPrefix: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+# Increase the Hystrix timeout to 60s (for all)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
